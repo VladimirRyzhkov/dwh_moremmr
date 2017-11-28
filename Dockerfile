@@ -31,6 +31,7 @@ RUN chown -v postgres.postgres /var/lib/pgsql/data/postgresql.conf
 
 RUN echo "host    all             all             0.0.0.0/0               md5" >> /var/lib/pgsql/data/pg_hba.conf
 
+WORKDIR /var/lib/pgsql
 VOLUME ["/var/lib/pgsql"]
 
 EXPOSE 5432
