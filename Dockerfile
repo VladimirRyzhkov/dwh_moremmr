@@ -13,6 +13,7 @@ RUN yum -y update; yum clean all
 RUN yum -y install deltarpm.x86_64 sudo.x86_64 epel-release.noarch; yum clean all
 RUN yum -y install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm
 RUN yum -y install postgresql96-server.x86_64 postgresql96.x86_64 postgresql96-contrib.x86_64 postgresql96-libs.x86_64 postgresql96-odbc.x86_64 postgresql96-devel.x86_64 postgresql-upgrade.x86_64 supervisor.noarch pwgen; yum clean all
+RUN yum -y install perl-PerlIO-gzip.x86_64; yum clean all
 #RUN yum -y install vim; yum clean all
 
 ADD ./postgresql-setup /usr/bin/postgresql-setup
@@ -23,6 +24,7 @@ ADD ./start_postgres.sh /start_postgres.sh
 ADD ./pg_backup.config /usr/bin/pg_backup.config
 ADD ./pg_backup.sh /usr/bin/pg_backup.sh
 ADD ./pg_backup_rotated.sh /usr/bin/pg_backup_rotated.sh
+ADD ./pg_restore.sh /usr/bin/pg_restore.sh
 
 #Sudo requires a tty. fix that.
 RUN sed -i 's/.*requiretty$/#Defaults requiretty/' /etc/sudoers
